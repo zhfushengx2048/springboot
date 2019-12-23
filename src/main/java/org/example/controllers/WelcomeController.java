@@ -1,11 +1,14 @@
 package org.example.controllers;
 
+import org.example.models.Customer;
+import org.example.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,6 +18,9 @@ public class WelcomeController {
     // inject via application.properties
     @Value("${welcome.message}")
     private String message;
+
+    @Resource
+    CustomerRepository customerRepository;
 
     private List<String> tasks = Arrays.asList("张三", "李四", "王五");
 
@@ -39,7 +45,19 @@ public class WelcomeController {
     @GetMapping("/element")
     public String mainWithParam( Model model) {
 
-        return "elementui"; //vie
+        return "elementui"; //view
+    }
+
+    @GetMapping("/customer")
+    public String customerHome( Model model) {
+        List<Customer> customers = customerRepository.findAll();
+        model.addAttribute("customers", customers);
+        return "customerview"; //view
+    }
+
+    @GetMapping("/custajax")
+    public String customerAjaxHome( Model model) {
+        return "customerajax"; //view
     }
 
 }
