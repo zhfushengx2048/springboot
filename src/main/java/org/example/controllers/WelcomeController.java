@@ -60,4 +60,9 @@ public class WelcomeController {
         return "customerajax"; //view
     }
 
+    @GetMapping("/example")
+    public String exampleHome( Model model) {
+        return "blank"; //view
+    }
+
 }
