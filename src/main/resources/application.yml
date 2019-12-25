@@ -22,3 +22,5 @@ logging:
           descriptor:
             sql:
               BasicBinder: TRACE
+server:
+  port: 8081
